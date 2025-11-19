@@ -2,4 +2,3 @@
 Victron Charger VE Direct - with Oled Display - Webinterface with settings - Relays for Cooling-Fan and Inverter 
 Hardware List : ESP8266 / Oled Display SH110X 1,2 Inch / PCF8574 Expander switch with low pegel / 4x Relay Board LOW pegel SWITCH / 2 x Temp Sensors DS18B20 for Battery and Victron
 
-https://github.com/Kamizo-Tec/Victron-Charger-VE-Direct---Oled---Webinterface---Relays/blob/main/Pictures/full_menue.jpeg
