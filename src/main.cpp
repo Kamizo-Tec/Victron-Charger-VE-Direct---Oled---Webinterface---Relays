@@ -1,6 +1,6 @@
 
 // KAMIZO TEC VICTRON VE_DIRECT V_1.0_ 07/2025
-//#include "VeDirectDeviceCodes.h" // only for info
+
 /* ESP 8266 Pins to use 
 
 1. Sensoren
@@ -12,10 +12,10 @@ GPIO12 / D5, GPIO14 / D6 → für manuelle Eingaben oder Resetfunktionen
 GPIO0 / D3 Flash-Pin beim ESP8266. boot, Flash-Modus / Normalbetrieb
 
 3. Relais / Aktoren
-GPIO 15 / D8 → zum Schalten von Pumpen, Ventilen, LEDs etc.
+PCF EXPANDER / NO LIBRARY / Direct codet 
 
 4. LEDs / Statusanzeigen
-GPIO 16 → ideal für Status-LEDs (z. B. Betrieb, Fehler, WLAN)
+für Status-LEDs (z. B. Betrieb, Fehler, WLAN)
 
 5. I2C-Erweiterungen
 OLED nutzt meist GPI O4 (SDA) und GPIO5 (SCL) → ( RTC, ADC, IO-Expander)
@@ -72,10 +72,10 @@ Adafruit_SH1106G display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 unsigned long lastDisplayUpdate = 0; // Loop display 
 
 // FREE PINS 
-// D0  // kein interrupt 
+// D0  // NO interrupt 
 
-// D1 // SCL
-// D2 // SDA
+// D1 // SCL OLED DISPLAY // PCF 8574 / EXPANDER 4 CH 
+// D2 // SDA OLED DISPLAY // PCF8574 /  EXPANDER 4 CH
 
 //  D7 / 
 //------------------------------------------------------------------------
@@ -98,7 +98,6 @@ float tempSensor_battery = 25.0;
 DeviceAddress sensorVictron = {0x28, 0x17, 0x90, 0x43, 0xD4, 0xE1, 0x3C, 0x34}; // sensor 1 
 DeviceAddress sensorBattery = {0x28, 0xF9, 0x3E, 0x43, 0xD4, 0xE1, 0x3C, 0x9F}; // sensor 0
 
-// Globale Werte für Anzeige und Web
 // Globale Variablen
 int mppt = 0; // MPPT CHARGER STATE / bulk float
 float Victron_BatteryVoltage = 00.00;
@@ -163,7 +162,7 @@ byte pcfState = 0xFF;
 
 // PCF EXPANDER steuerung legende
 /* 
-Aktiv LOW: Relais schalten bei LOW, also bitClear() = EIN
+Aktiv LOW: Relais switch  LOW Level , also bitClear() = EIN
 Wire.write(0b11111101);  // Bit 1 = 0 → P1 = LOW
 
 set(fan, true);       // FAN EIN
@@ -1566,3 +1565,4 @@ Y = 24;  // Zeile 2
 Y = 48;  // Zeile 3 ← letzte volle Zeile
 
 */
+
