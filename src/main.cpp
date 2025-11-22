@@ -1,31 +1,6 @@
 
-// KAMIZO TEC VICTRON VE_DIRECT V_1.0_ 07/2025
+// KAMIZO TEC VICTRON VE_DIRECT PRE_V_1.0_ 07/2025
 
-/* ESP 8266 Pins to use 
-
-1. Sensoren
-DS18B20 (Temperatur, OneWire) → D4 / GPIO4
-
-2. Taster / Schalter
-GPIO12 / D5, GPIO14 / D6 → für manuelle Eingaben oder Resetfunktionen
-
-GPIO0 / D3 Flash-Pin beim ESP8266. boot, Flash-Modus / Normalbetrieb
-
-3. Relais / Aktoren
-PCF EXPANDER / NO LIBRARY / Direct codet 
-
-4. LEDs / Statusanzeigen
-für Status-LEDs (z. B. Betrieb, Fehler, WLAN)
-
-5. I2C-Erweiterungen
-OLED nutzt meist GPI O4 (SDA) und GPIO5 (SCL) → ( RTC, ADC, IO-Expander)
-
-6. PWM-Ausgabe
-Für z. B. Lüftersteuerung, LED-Dimmung → GPIO12 / D6, GPIO13 / D7 , GPIO14 / D5 /RX
-
-GPIO10
-Nicht empfohlen für normale Nutzung //boot flash
-*/
 
 // LOAD OUTPUT Lastausgang schalten falls vorhanden: --------------------------
 
@@ -71,13 +46,15 @@ Nicht empfohlen für normale Nutzung //boot flash
 Adafruit_SH1106G display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 unsigned long lastDisplayUpdate = 0; // Loop display 
 
-// FREE PINS 
-// D0  // NO interrupt 
+// D5 not used
 
-// D1 // SCL OLED DISPLAY // PCF 8574 / EXPANDER 4 CH 
-// D2 // SDA OLED DISPLAY // PCF8574 /  EXPANDER 4 CH
+// D1 // SCL DISPAY OLED
+// D2 // SDA DISPLAY OLED
 
-//  D7 / 
+//  MYPORT_TX 15 // D8   read pin
+//  MYPORT_RX 13 // D7  write pin , not used 
+// ONE_WIRE_BUS D0  // best Pin
+// DISPLAY_BUTTON_PIN D6 // // button or PIR sensor / display on/off / input pullup 
 //------------------------------------------------------------------------
 
 bool displayOn = false;
@@ -88,7 +65,7 @@ const unsigned long DISPLAY_TIMEOUT = 240 * 60 * 1000; // 60 Minuten
 #define DISPLAY_BUTTON_PIN D6 // // button display on / off input pullup
 //---------------------------------------------------------------------------
 
-#define ONE_WIRE_BUS D5  
+#define ONE_WIRE_BUS D0   
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
@@ -1565,4 +1542,5 @@ Y = 24;  // Zeile 2
 Y = 48;  // Zeile 3 ← letzte volle Zeile
 
 */
+
 
